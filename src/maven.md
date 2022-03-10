@@ -8,6 +8,18 @@ $ mvn deploy:deploy-file -DgroupId=net.bulletin \
   -DrepositoryId=aws-release \
   -Durl=https://messagemedia.jfrog.io/messagemedia/libs-releases-local
 ```
+- Install 3rd party JARs
+```
+$ mvn install:install-file -Dfile=<path-to-file> \
+  -DgroupId=<group-id> \
+  -DartifactId=<artifact-id> \
+  -Dversion=<version> \
+  -Dpackaging=<packaging>
+```
+- If there's a pom-file as well, you can install it with the following command
+```
+mvn install:install-file -Dfile=<path-to-file> -DpomFile=<path-to-pomfile>
+```
 
 - predefined properties:
   https://web.archive.org/web/20150520200505/https://docs.codehaus.org/display/MAVENUSER/MavenPropertiesGuide
