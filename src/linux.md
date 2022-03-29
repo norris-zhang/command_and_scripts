@@ -3,4 +3,5 @@
 $ grep -r "keyword to look" /folder
 ```
 -r or --recursive means to recursively search. But it will skip symbolic links that are encountered recursively.
-Use -R if you want to follow all the symbolic links.
+Use -R if you want to follow all the symbolic links. \
+If the keyword does not include spaces, the double quotes are optional.
