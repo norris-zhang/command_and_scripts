@@ -1,4 +1,4 @@
-- grep to find string in files recursively
+- ### grep to find string in files recursively
 ```shell
 $ grep -r "keyword to look" /folder
 ```
@@ -6,13 +6,13 @@ $ grep -r "keyword to look" /folder
 Use -R if you want to follow all the symbolic links. \
 If the keyword does not include spaces, the double quotes are optional.
 
-- View listening ports:
+- ### View listening ports:
 ```shell
 $ sudo lsof -i -P -n | grep LISTEN
 $ sudo lsof -i:22
 ```
 
-- sed: stream edit. Edit file/string without opening the file
+- ### sed: stream edit. Edit file/string without opening the file
 ```shell
 $ sed 's/unit/linux/g' <filename>
 ```
@@ -27,3 +27,7 @@ replace the 3rd occurrence of each line.
 Reference:
 https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/
 
+- ### Find out IPs of a domain
+```shell
+$ dig +short google.com
+```
