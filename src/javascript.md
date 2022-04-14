@@ -8,3 +8,8 @@ $ nvm use 16.14.0
 $ nvm ls-remote --lts
 $ nvm version-remote --lts
 ```
+- ### install a version
+```shell
+$ nvm install node # "node" is an alias for the latest version
+$ nvm install 14.7.0
+```
