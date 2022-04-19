@@ -29,3 +29,10 @@ $ aws ec2 describe-instances --instance-ids "$INSTANCE" | jq '.Reservations[].In
 ```shell
 $ aws ssm get-parameter --name "/st-service-registry/account-coordinator/endpoint" | jq '.Parameter.Value' -r
 ```
+
+- ### from cloud formation to ec2 instance IPs
+```shell
+$ aws cloudformation describe-stack-resources --stack-name idm-dashboard-a | jq '.StackResources[]|select(.LogicalResourceId=="AMSGroup")|.PhysicalResourceId' -r | xargs aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names | jq '.AutoScalingGroups[0].Instances[0].InstanceId' -r  | xargs aws ec2 describe-instances --instance-ids | jq '.Reservations[].Instances[].PrivateIpAddress' -r
+10.25.26.211
+$ ssh 10.25.26.211 cat /etc/tomcat7/server.xml | grep idm.jdbc
+```
