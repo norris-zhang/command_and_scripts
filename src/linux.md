@@ -31,3 +31,11 @@ https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/
 ```shell
 $ dig +short google.com
 ```
+
+- ### List all timezones and set timezone
+```shell
+$ sudo systemsetup -listtimezones
+$ sudo systemsetup -listtimezones | grep -i sydney
+$ sudo systemsetup -settimezone Australia/Sydney
+```
+
