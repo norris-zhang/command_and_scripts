@@ -36,3 +36,33 @@ $ aws cloudformation describe-stack-resources --stack-name idm-dashboard-a | jq 
 10.25.26.211
 $ ssh 10.25.26.211 cat /etc/tomcat7/server.xml | grep idm.jdbc
 ```
+
+- ### CLI to local fake services
+```shell
+$ aws --endpoint-url http://localhost:9324 sqs list-queues
+```
+
+- ### send message to SQS
+```shell
+$ aws sqs send-message --queue-url <value> --message-body <value>
+[--delay-seconds <value>]
+[--message-attributes <value>]
+[--message-system-attributes <value>]
+[--message-deduplication-id <value>]
+[--message-group-id <value>]
+[--cli-input-json <value>]
+[--generate-cli-skeleton <value>]
+```
+
+- ### receive message from SQS
+```shell
+$ aws sqs receive-message --queue-url <value>
+[--attribute-names <value>]
+[--message-attribute-names <value>]
+[--max-number-of-messages <value>]
+[--visibility-timeout <value>]
+[--wait-time-seconds <value>]
+[--receive-request-attempt-id <value>]
+[--cli-input-json <value>]
+[--generate-cli-skeleton <value>]
+```

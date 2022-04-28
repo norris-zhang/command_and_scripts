@@ -39,3 +39,8 @@ $ sudo systemsetup -listtimezones | grep -i sydney
 $ sudo systemsetup -settimezone Australia/Sydney
 ```
 
+- ### Count lines
+```shell
+$ wc -l
+$ aws sqs list-queues | jq -r ".[]" | wc -l
+```
