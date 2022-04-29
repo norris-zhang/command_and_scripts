@@ -40,6 +40,15 @@ $ ssh 10.25.26.211 cat /etc/tomcat7/server.xml | grep idm.jdbc
 - ### CLI to local fake services
 ```shell
 $ aws --endpoint-url http://localhost:9324 sqs list-queues
+{
+    "QueueUrls": [
+        "http://192.168.48.5:9324/queue/billing-notification-event-bus",
+        "http://192.168.48.5:9324/queue/usage-aggregator-retry",
+        "http://192.168.48.5:9324/queue/billing_usage_aggregation"
+    ]
+}
+$ aws --endpoint-url http://localhost:9324 sqs receive-message --queue-url http://localhost:9324/queue/usage-aggregator-retry
+# It is OK to use either localhost or 192.168.48.5 as the queue-url if the queues are in docker. Or use the docker container service name which is the domain name of the service.
 ```
 
 - ### send message to SQS
