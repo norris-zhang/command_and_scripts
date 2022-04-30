@@ -75,3 +75,14 @@ $ aws sqs receive-message --queue-url <value>
 [--cli-input-json <value>]
 [--generate-cli-skeleton <value>]
 ```
+
+- ### purge SQS queue
+```shell
+$ aws sqs purge-queue --queue-url http://localhost:9324/queue/usage-aggregator-retry
+```
+
+- ### get available message number
+```shell
+aws sqs get-queue-attributes --queue-url http://localhost:9324/queue/usage-aggregator-retry --attribute-names All
+# valid attribute names: https://docs.aws.amazon.com/cli/latest/reference/sqs/get-queue-attributes.html
+```
