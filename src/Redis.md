@@ -24,3 +24,10 @@ PONG
 $ redis-cli -u redis://LJenkins:p%40ssw0rd@redis-16379.hosted.com:16379/0 PING
 PONG
 ```
+
+- ### purge
+```shell
+redis-cli> flushall
+# or
+redis-cli> flushdb
+```
