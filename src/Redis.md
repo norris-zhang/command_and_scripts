@@ -31,3 +31,10 @@ redis-cli> flushall
 # or
 redis-cli> flushdb
 ```
+
+- ### type of a key
+```shell
+redis-cli> type key
+# zset is SortedSet
+redis-cli> zrange key
+```
