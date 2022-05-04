@@ -5,3 +5,4 @@
 [Javascript](src/javascript.md) \
 [PostgreSQL](src/postgresql.md) \
 [Docker](src/docker.md)
+[Git](src/git.md)
