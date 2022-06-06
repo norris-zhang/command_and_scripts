@@ -61,6 +61,9 @@ $ aws sqs send-message --queue-url <value> --message-body <value>
 [--message-group-id <value>]
 [--cli-input-json <value>]
 [--generate-cli-skeleton <value>]
+
+# send message from a file
+$ aws sqs send-message --queue-url <value> --message-body file:///Users/norris/Documents/temp/xxx.json
 ```
 
 - ### receive message from SQS

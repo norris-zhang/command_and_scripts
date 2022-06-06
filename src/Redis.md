@@ -32,6 +32,14 @@ redis-cli> flushall
 redis-cli> flushdb
 ```
 
+- ### list all keys
+```shell
+redis-cli> KEYS
+# with wildcard
+redis-cli> KEYS *name*
+redis-cli> KEYS a??
+```
+
 - ### type of a key
 ```shell
 redis-cli> type key
