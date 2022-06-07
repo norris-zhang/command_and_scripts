@@ -32,3 +32,8 @@ ${pom.parent.version}
 ```shell
 $ mvn clean install -Denforcer.skip=true -Dskip.analyze=true -Dmaven.test.skip=true
 ```
+
+- ### disable checkstyle and pmd
+```shell
+$ mvn clean install -Dmaven.test.skip=true -Dskip.analyze=true -Dcheckstyle.skip=true -Dpmd.skip=true
+```
