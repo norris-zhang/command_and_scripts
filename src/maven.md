@@ -37,3 +37,8 @@ $ mvn clean install -Denforcer.skip=true -Dskip.analyze=true -Dmaven.test.skip=t
 ```shell
 $ mvn clean install -Dmaven.test.skip=true -Dskip.analyze=true -Dcheckstyle.skip=true -Dpmd.skip=true
 ```
+
+- ### disable spotbugs
+```shell
+$ mvn clean install -Dmaven.test.skip=true -Dskip.analyze=true -Dcheckstyle.skip=true -Dpmd.skip=true -Dspotbugs.skip=true
+```
