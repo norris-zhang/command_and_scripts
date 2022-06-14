@@ -42,3 +42,9 @@ $ mvn clean install -Dmaven.test.skip=true -Dskip.analyze=true -Dcheckstyle.skip
 ```shell
 $ mvn clean install -Dmaven.test.skip=true -Dskip.analyze=true -Dcheckstyle.skip=true -Dpmd.skip=true -Dspotbugs.skip=true
 ```
+
+- ### list all the properties
+```shell
+$ mvn help:evaluate -Dexpression=project.properties
+$ mvn help:evaluate -Dexpression=project.properties -q -DforceStdout
+```
