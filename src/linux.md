@@ -44,3 +44,16 @@ $ sudo systemsetup -settimezone Australia/Sydney
 $ wc -l
 $ aws sqs list-queues | jq -r ".[]" | wc -l
 ```
+
+- ### decode base64
+```shell
+$ openssl base64 -d [enter]
+[paste encrypted code] [enter]
+[ctrl + D]
+[output]
+
+$ openssl base64 [-e][enter]
+[paste plain text][ctrl + D][enter]
+[ctrl + D]
+[output]
+```

@@ -40,6 +40,12 @@ redis-cli> KEYS *name*
 redis-cli> KEYS a??
 ```
 
+- ### scan as opposed to keys
+keys don't list some types of keys
+```shell
+redis-cli> scan 0 MATCH *name*
+```
+
 - ### type of a key
 ```shell
 redis-cli> type key
