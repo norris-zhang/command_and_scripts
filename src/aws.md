@@ -89,3 +89,10 @@ $ aws sqs purge-queue --queue-url http://localhost:9324/queue/usage-aggregator-r
 aws sqs get-queue-attributes --queue-url http://localhost:9324/queue/usage-aggregator-retry --attribute-names All
 # valid attribute names: https://docs.aws.amazon.com/cli/latest/reference/sqs/get-queue-attributes.html
 ```
+
+- ### retrieve data from a Kinesis Data Stream
+```shell
+$ aws kinesis list-streams
+$ aws kinesis list-streams | grep -- ugapps-EventNotification- | xargs aws kinesis list-shards --stream-name
+$ aws kinesis get-shard-iterator --shard-id shardId-000000000000 --stream-name ugapps-EventNotification-1XTROYB5W9DBP --shard-iterator-type LATEST | jq '.ShardIterator' -r | xargs aws kinesis get-records --shard-iterator
+```
