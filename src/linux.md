@@ -57,3 +57,8 @@ $ openssl base64 [-e][enter]
 [ctrl + D]
 [output]
 ```
+
+- ### Ubuntu auto remove to clear /boot space full
+```shell
+$ sudo apt autoremove
+```
