@@ -96,3 +96,17 @@ $ aws kinesis list-streams
 $ aws kinesis list-streams | grep -- ugapps-EventNotification- | xargs aws kinesis list-shards --stream-name
 $ aws kinesis get-shard-iterator --shard-id shardId-000000000000 --stream-name ugapps-EventNotification-1XTROYB5W9DBP --shard-iterator-type LATEST | jq '.ShardIterator' -r | xargs aws kinesis get-records --shard-iterator
 ```
+
+- ### aws sso login. Not sure why it wasn't working but now is working, but just keep a record here.
+```shell
+$ asp billing-dev
+$ aws sso login
+# then accept on the browser
+$ aws s3 ls
+```
+
+- ### cfn plugin for IntelliJ
+- cfn-lint
+```shell
+$ brew install cfn-lint
+```

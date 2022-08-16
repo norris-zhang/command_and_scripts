@@ -7,7 +7,7 @@ public class TimeZoneConverter {
     public static void main(String[] args) {
         //UTC  2022-07-12T00:02:13.571Z
         //Pacific/Auckland 2022-07-12T12:02:13.571+12:00[Pacific/Auckland]
-        String timeStr = "2022-07-18T12:22:01.001+12:00";
+        String timeStr = "2022-07-25T10:39:01.001+12:00";
         ZonedDateTime zdt = ZonedDateTime.parse(timeStr);
         ZonedDateTime destZdt = zdt.withZoneSameInstant(ZoneId.of("UTC"));
         System.out.println(zdt);
