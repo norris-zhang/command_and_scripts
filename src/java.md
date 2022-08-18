@@ -7,3 +7,9 @@ $ jenv local 11
 $ jenv shell openjdk64-1.8.0.252
 
 ```
+
+- ### flyway clean and migrate
+```shell
+$ mvn clean flyway:clean flyway:migrate -Dflyway.user=lisa -Dflyway.password=password -Dflyway.url=jdbc:postgresql://localhost:5432/lisadb
+$ mvn clean flyway:info -Dflyway.user=lisa -Dflyway.password=password -Dflyway.url=jdbc:postgresql://localhost:5432/lisadb
+```
