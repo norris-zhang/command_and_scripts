@@ -34,6 +34,7 @@ services:
 ```shell
 $ docker-compose -f ./test.yml run --rm stackup norris-test up \
     -t cfn-template.yml \
+    --preserve-template-formatting \
     --capability CAPABILITY_NAMED_IAM \
     --tags cfn-template.tags.yml \
     -p cfn-template.parameters.json \
@@ -45,6 +46,7 @@ $ docker-compose -f ./test.yml run --rm stackup norris-test up \
 # --tags tags file in yml
 # -p parameter json file
 # -o pass in any parameters that is not included in the parameter json file
+# --preserve-template-formatting: preserve the yaml version in the cfn template.
 ```
 ```yaml
 # something.tags.yml
