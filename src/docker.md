@@ -61,3 +61,21 @@ Something:Tag3: Value3
   "EcrRepository": "12345678.dkr.ecr.ap-southeast-2.amazonaws.com"
 }
 ```
+
+- ### Docker run stackup directly without a docker-compose.yml
+```shell
+$ REL_VER=1.1.1-602
+$ STACK_NAME=norris-test
+$ docker run --rm --init --volume $HOME/.aws:/root/.aws \
+    --volume $(pwd)/infrastructure:/app \
+    --workdir /app \
+    --env AWS_PROFILE \
+    --env AWS_REGION \
+    --env AWS_DEFAULT_REGION \
+    realestate/stackup:latest ${STACK_NAME} up \
+      -t /app/${STACK_NAME}.yml \
+      -o ReleaseVersion=$REL_VER \
+      --tags /app/${STACK_NAME}.tags.yml \
+      --capability CAPABILITY_NAMED_IAM \
+      --capability CAPABILITY_AUTO_EXPAND
+```
