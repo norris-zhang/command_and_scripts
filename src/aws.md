@@ -110,3 +110,8 @@ $ aws s3 ls
 ```shell
 $ brew install cfn-lint
 ```
+
+- ### aws ssm Session Manager
+```shell
+$ aws ssm start-session --target i-0bc44f783124b4465
+```
