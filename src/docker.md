@@ -74,6 +74,7 @@ $ docker run --rm --init --volume $HOME/.aws:/root/.aws \
     --env AWS_DEFAULT_REGION \
     realestate/stackup:latest ${STACK_NAME} up \
       -t /app/${STACK_NAME}.yml \
+      --preserve-template-formatting \
       -o ReleaseVersion=$REL_VER \
       --tags /app/${STACK_NAME}.tags.yml \
       --capability CAPABILITY_NAMED_IAM \
