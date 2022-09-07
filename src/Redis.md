@@ -72,3 +72,14 @@ $ HGETALL user:1000
 $ smembers key
 $ sadd key "value"
 ```
+
+- ### install redis-cli on ec2
+```shell
+$ sudo yum update
+$ sudo yum install gcc
+$ wget http://download.redis.io/redis-stable.tar.gz
+$ tar xvzf redis-stable.tar.gz
+$ cd redis-stable
+$ make
+$ src/redis-cli -c -h host -p port
+```

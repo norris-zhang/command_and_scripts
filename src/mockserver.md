@@ -57,9 +57,12 @@ services:
     environment:
       MOCKSERVER_PROPERTY_FILE: /config/mockserver.properties
       MOCKSERVER_INITIALIZATION_JSON_PATH: /config/initializerJson.json
+      MOCKSERVER_SERVER_PORT: 1080
     volumes:
       - type: bind
         source: .
         target: /config
 ```
 
+- ### dashboard url
+`http://localhost:1080/mockserver/dashboard`
