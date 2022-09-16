@@ -115,3 +115,31 @@ $ brew install cfn-lint
 ```shell
 $ aws ssm start-session --target i-0bc44f783124b4465
 ```
+
+- ### enable shell ability on ECS services
+```yaml
+TaskRole:
+  Policies:
+    - PolicyName: SshPolicy
+      PolicyDocument:
+        Statement:
+          - Action:
+              - "ssmmessages:CreateControlChannel"
+              - "ssmmessages:CreateDataChannel"
+              - "ssmmessages:OpenControlChannel"
+              - "ssmmessages:OpenDataChannel"
+            Effect: Allow
+            Resource:
+              - "*"
+ECSService:
+  Properties:
+    EnableExecuteCommand: true
+```
+```shell
+$ aws ecs execute-command --region us-west-2 \
+    --cluster billing-service-cluster \
+    --task $(aws ecs list-tasks --cluster billing-service-cluster --service billing-service --region us-west-2 --output text --query 'taskArns[0]') \
+    --container billing-service \
+    --command "curl -X POST --data DEBUG -H'Content-type: text/plain' http://localhost:8888/loglevels/com.messagemedia.zuora" \
+    --interactive
+```
