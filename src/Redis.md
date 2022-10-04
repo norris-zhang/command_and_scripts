@@ -83,3 +83,11 @@ $ cd redis-stable
 $ make
 $ src/redis-cli -c -h host -p port
 ```
+
+- ### Redis databases
+Redis has 16 out-of-box logical databases, indexed 0 to 15
+```shell
+cli> select 1
+# switched to database 1
+cli[1]> scan 0
+```
