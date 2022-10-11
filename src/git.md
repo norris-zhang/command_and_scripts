@@ -8,3 +8,8 @@ $ git stash show stash@{0} -p
 ```shell
 $ git push origin --delete feature/branch-name
 ```
+
+- ### bypass pre-push hook
+```shell
+$ git push origin HEAD --no-verify
+```
