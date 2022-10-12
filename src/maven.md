@@ -48,3 +48,9 @@ $ mvn clean install -Dmaven.test.skip=true -Dskip.analyze=true -Dcheckstyle.skip
 $ mvn help:evaluate -Dexpression=project.properties
 $ mvn help:evaluate -Dexpression=project.properties -q -DforceStdout
 ```
+
+- ### specify settings and repo folder
+```shell
+$ mvn -s ~/.m2/settings-default.xml -Dmaven.repo.local=~/.m2/repo-default/ clean install
+# -s = --settings
+```
