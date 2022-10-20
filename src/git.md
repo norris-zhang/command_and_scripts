@@ -13,3 +13,9 @@ $ git push origin --delete feature/branch-name
 ```shell
 $ git push origin HEAD --no-verify
 ```
+
+- ### create a tag
+```shell
+$ git tag -a v4.1.0 abcde9f
+$ git push origin v4.1.0
+```

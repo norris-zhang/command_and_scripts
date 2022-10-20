@@ -3,12 +3,28 @@ package com.guoba.tools;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 public class TimeZoneConverter {
     public static void main(String[] args) {
 //        listZones();
 //        zonedConversion();
-        localToZoned();
+//        localToZoned();
+        whichTimeZoneHasDifferentDateFromUTC();
+    }
+
+    private static void whichTimeZoneHasDifferentDateFromUTC() {
+        Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(2022, 1, 1, 0, 0, 0, 0, ZoneId.of("UTC"));
+        System.out.println(zonedDateTime);
+        int dayOfMonth = zonedDateTime.getDayOfMonth();
+        availableZoneIds.forEach(tz -> {
+            ZonedDateTime zdt = zonedDateTime.withZoneSameInstant(ZoneId.of(tz));
+            if (zdt.getDayOfMonth() != dayOfMonth) {
+                System.out.println("timezone: " + tz);
+                System.out.println(zdt);
+            }
+        });
     }
 
     private static void listZones() {
