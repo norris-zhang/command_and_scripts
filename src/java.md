@@ -13,3 +13,13 @@ $ jenv shell openjdk64-1.8.0.252
 $ mvn clean flyway:clean flyway:migrate -Dflyway.user=lisa -Dflyway.password=password -Dflyway.url=jdbc:postgresql://localhost:5432/lisadb
 $ mvn clean flyway:info -Dflyway.user=lisa -Dflyway.password=password -Dflyway.url=jdbc:postgresql://localhost:5432/lisadb
 ```
+
+- ### Map.computeIfAbsent
+```java
+class C {
+    public static void main(String[] args) {
+        Map<String, String> map = new HashMap<>();
+        map.computeIfAbsent(key, x -> compute(x));
+    }
+}
+```
