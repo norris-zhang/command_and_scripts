@@ -3,6 +3,7 @@ package com.guoba.tools;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 public class TimeZoneConverter {
@@ -10,7 +11,14 @@ public class TimeZoneConverter {
 //        listZones();
 //        zonedConversion();
 //        localToZoned();
-        whichTimeZoneHasDifferentDateFromUTC();
+//        whichTimeZoneHasDifferentDateFromUTC();
+        dateTimeToTimestamp();
+    }
+
+    private static void dateTimeToTimestamp() {
+        ZonedDateTime zdt = ZonedDateTime.parse("2022-10-31T02:02:02+13:00", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        System.out.println(zdt.toString());
+
     }
 
     private static void whichTimeZoneHasDifferentDateFromUTC() {
