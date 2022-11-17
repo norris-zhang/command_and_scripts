@@ -31,3 +31,17 @@ module.exports = {
     ...
 }
 ```
+
+- ### run cypress tests
+```shell
+$ node_modles/.bin/cypress open
+$ # or
+$ npm run test:functional:watch
+```
+```json
+{
+  "scripts": {
+    "test:functional:watch": "cypress open"
+  }
+}
+```

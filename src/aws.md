@@ -51,6 +51,11 @@ $ aws --endpoint-url http://localhost:9324 sqs receive-message --queue-url http:
 # It is OK to use either localhost or 192.168.48.5 as the queue-url if the queues are in docker. Or use the docker container service name which is the domain name of the service.
 ```
 
+- ### list queue with prefix
+```shell
+$ aws sqs list-queues --queue-name-prefix {prefix}
+```
+
 - ### send message to SQS
 ```shell
 $ aws sqs send-message --queue-url <value> --message-body <value>
