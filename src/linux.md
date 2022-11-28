@@ -56,6 +56,9 @@ $ openssl base64 [-e][enter]
 [paste plain text][ctrl + D][enter]
 [ctrl + D]
 [output]
+
+$ # in MacOS
+$ echo -n "text" | base64
 ```
 
 - ### Ubuntu auto remove to clear /boot space full

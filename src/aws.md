@@ -102,6 +102,11 @@ $ aws kinesis list-streams | grep -- ugapps-EventNotification- | xargs aws kines
 $ aws kinesis get-shard-iterator --shard-id shardId-000000000000 --stream-name ugapps-EventNotification-1XTROYB5W9DBP --shard-iterator-type LATEST | jq '.ShardIterator' -r | xargs aws kinesis get-records --shard-iterator
 ```
 
+- ### put data onto Kinesis Data Stream
+```shell
+$ aws kinesis put-data --stream-name <stream-name> --partition-key <partition-key> --daata <base64 encoded data>
+```
+
 - ### aws sso login. Not sure why it wasn't working but now is working, but just keep a record here.
 ```shell
 $ asp billing-dev
@@ -147,4 +152,10 @@ $ aws ecs execute-command --region us-west-2 \
     --container billing-service \
     --command "curl -X POST --data DEBUG -H'Content-type: text/plain' http://localhost:8888/loglevels/com.messagemedia.zuora" \
     --interactive
+```
+
+- CDK synth
+```shell
+$ npm install -g aws-cdk
+$ cdk synth && docker run --rm -it -e AWS_PROFILE -v "$(pwd):/cwd" -v "$HOME/.aws:/root/.aws" realestate/stackup internal-reporting-fargate up -t cdk.out/internal-reporting-fargate.template.json --tags awstags.json
 ```
