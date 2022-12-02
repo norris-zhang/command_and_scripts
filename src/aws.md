@@ -159,3 +159,8 @@ $ aws ecs execute-command --region us-west-2 \
 $ npm install -g aws-cdk
 $ cdk synth && docker run --rm -it -e AWS_PROFILE -v "$(pwd):/cwd" -v "$HOME/.aws:/root/.aws" realestate/stackup internal-reporting-fargate up -t cdk.out/internal-reporting-fargate.template.json --tags awstags.json
 ```
+
+- Find resources in stacks
+```shell
+$ aws cloudformation describe-stack-resources --physical-resource-id "<resource_physical_name>"
+```

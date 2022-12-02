@@ -80,3 +80,8 @@ $ docker run --rm --init --volume $HOME/.aws:/root/.aws \
       --capability CAPABILITY_NAMED_IAM \
       --capability CAPABILITY_AUTO_EXPAND
 ```
+
+- ### Docker login to aws ecr
+```shell
+$ aws ecr get-login-password | docker login --username AWS --password-stdin <AWS::AccountId>.dkr.ecr.us-west-2.amazonaws.com
+```
