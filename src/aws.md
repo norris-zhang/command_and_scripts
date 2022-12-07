@@ -121,6 +121,11 @@ $ aws s3 ls
 $ brew install cfn-lint
 ```
 
+- ### docker image cfn-lint
+```shell
+$ docker run --rm -v $(pwd)/infrastructure:/data giammbo/cfn-lint /data/usage-aggregator.yml
+```
+
 - ### aws ssm Session Manager
 ```shell
 $ aws ssm start-session --target i-0bc44f783124b4465

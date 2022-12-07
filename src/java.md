@@ -23,3 +23,8 @@ class C {
     }
 }
 ```
+
+- ### specify spring profile
+```shell
+$ mvn xxx -Dspring.profiles.active=dev
+```
