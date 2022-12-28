@@ -65,3 +65,20 @@ $ echo -n "text" | base64
 ```shell
 $ sudo apt autoremove
 ```
+
+- ### AWS Linux Install java 17
+```shell
+$ sudo yum install java-17-amazon-corretto-headless # headless for server load. No GUI packages
+$ sudo yum install java-17-amazon-corretto # headful version
+$ sudo yum install java-17-amazon-corretto-devel #jdk
+$ sudo yum install java-17-amazon-corretto-jmods #jmods
+# The installation location is /usr/lib/jvm/java-17-amazon-corretto.<cpu_arch>.
+
+# verification
+$ sudo alternatives --config java
+
+# uninstall
+$ sudo yum remove java-17-amazon-corretto-headless
+```
+
+

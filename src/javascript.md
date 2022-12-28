@@ -45,3 +45,13 @@ $ npm run test:functional:watch
   }
 }
 ```
+
+- ### npm ci vs npm install
+```shell
+# npm i stands for npm install
+# npm ci stands for clean install
+# npm install installs packages based on package.json
+# npm ci installs packages with exact versions in package-lock.json
+# npm install is used to install a dependency.
+# npm ci is usually used to compile a project cloned from remote which does not have a node_module yet.
+```
