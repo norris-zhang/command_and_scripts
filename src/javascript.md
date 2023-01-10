@@ -55,3 +55,10 @@ $ npm run test:functional:watch
 # npm install is used to install a dependency.
 # npm ci is usually used to compile a project cloned from remote which does not have a node_module yet.
 ```
+
+- ### npm version is separate from node version.
+Check what packages are installed
+```shell
+$ npm list -g | grep aws-cdk
+$ npm list | grep typescript
+```
