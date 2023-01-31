@@ -169,3 +169,22 @@ $ cdk synth && docker run --rm -it -e AWS_PROFILE -v "$(pwd):/cwd" -v "$HOME/.aw
 ```shell
 $ aws cloudformation describe-stack-resources --physical-resource-id "<resource_physical_name>"
 ```
+
+- SQS Subscribes SNS
+If SQS subscribes SNS, it creates the access policy so the SNS can send messages to it. If the subscription is created from the Topic side, it does not have the permission to send messages to the queue.
+```json
+{
+  "Sid": "topic-subscription-arn:aws:sns:ap-southeast-2:123456789012:norris-test-topic",
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "*"
+  },
+  "Action": "SQS:SendMessage",
+  "Resource": "arn:aws:sqs:ap-southeast-2:123456789012:norris-test-queue",
+  "Condition": {
+    "ArnLike": {
+      "aws:SourceArn": "arn:aws:sns:ap-southeast-2:123456789012:norris-test-topic"
+    }
+  }
+}
+```
