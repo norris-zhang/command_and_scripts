@@ -9,10 +9,10 @@ import java.util.Set;
 public class TimeZoneConverter {
     public static void main(String[] args) {
 //        listZones();
-//        zonedConversion();
+        zonedConversion();
 //        localToZoned();
 //        whichTimeZoneHasDifferentDateFromUTC();
-        dateTimeToTimestamp();
+//        dateTimeToTimestamp();
     }
 
     private static void dateTimeToTimestamp() {
@@ -52,9 +52,9 @@ public class TimeZoneConverter {
     private static void zonedConversion() {
         //UTC  2022-07-12T00:02:13.571Z
         //Pacific/Auckland 2022-07-12T12:02:13.571+12:00[Pacific/Auckland]
-        String timeStr = "2022-08-02T00:00:00.000+12:00";
+        String timeStr = "2023-02-08T01:40:53.000Z";
         ZonedDateTime zdt = ZonedDateTime.parse(timeStr);
-        ZonedDateTime destZdt = zdt.withZoneSameInstant(ZoneId.of("UTC"));
+        ZonedDateTime destZdt = zdt.withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
         System.out.println(zdt);
         System.out.println(destZdt);
     }
