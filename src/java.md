@@ -1,11 +1,14 @@
 - ### jenv commands
-```
+```shell
 $ jenv add /Library/Java/JavaVirtualMachines/openjdk-14.0.1.jdk/Contents/Home
 $ jenv versions
 $ jenv global 14.0
 $ jenv local 11
 $ jenv shell openjdk64-1.8.0.252
-
+# install jdk
+$ brew install openjdk@17
+$ brew list jdk
+$ jenv add /Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/
 ```
 
 - ### flyway clean and migrate
@@ -34,4 +37,9 @@ $ mvn xxx -Dspring.profiles.active=dev
 @Value("${something.something:}")
 // or
 @Value("${something.something:#{null}}")
+```
+
+- ### IntelliJ Hot Keys
+```
+Reformat Code: option+command+L / Ctrl+Alt+L
 ```
