@@ -9,10 +9,23 @@ import java.util.Set;
 public class TimeZoneConverter {
     public static void main(String[] args) {
 //        listZones();
-        zonedConversion();
+//        zonedConversion();
 //        localToZoned();
 //        whichTimeZoneHasDifferentDateFromUTC();
 //        dateTimeToTimestamp();
+        testZoneLocal();
+    }
+
+    private static void testZoneLocal() {
+        ZonedDateTime now = ZonedDateTime.now();
+        System.out.println(now);
+        System.out.println(now.toLocalDateTime());
+        System.out.println(now);
+        ZonedDateTime zonedDateTime = now.withZoneSameInstant(ZoneId.of("America/Los_Angeles"));
+        System.out.println("LA");
+        System.out.println(zonedDateTime);
+        System.out.println(zonedDateTime.toLocalDateTime());
+        System.out.println(zonedDateTime);
     }
 
     private static void dateTimeToTimestamp() {
@@ -40,22 +53,29 @@ public class TimeZoneConverter {
     }
 
     private static void localToZoned() {
-        String localStr = "2022-08-02T00:00:00.000";
+        String localStr = "2023-05-16T00:00:00.000";
         LocalDateTime localDateTime = LocalDateTime.parse(localStr);
-        System.out.println(localDateTime);
-        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("Australia/Sydney"));
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("America/Los_Angeles"));
+        System.out.println("LA");
         System.out.println(zonedDateTime);
-        ZonedDateTime nzTime = zonedDateTime.withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
-        System.out.println(nzTime);
+
+        ZonedDateTime utc = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
+        System.out.println("UTC");
+        System.out.println(utc);
     }
 
     private static void zonedConversion() {
-        //UTC  2022-07-12T00:02:13.571Z
-        //Pacific/Auckland 2022-07-12T12:02:13.571+12:00[Pacific/Auckland]
-        String timeStr = "2023-02-08T01:40:53.000Z";
-        ZonedDateTime zdt = ZonedDateTime.parse(timeStr);
-        ZonedDateTime destZdt = zdt.withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
-        System.out.println(zdt);
-        System.out.println(destZdt);
+
+        //"2023-05-11 17:20:36 UTC+1200"
+        String zonedStr = "2023-05-16T00:00:00+12:00";
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(zonedStr);
+        System.out.println("UTC+12");
+        System.out.println(zonedDateTime);
+
+        ZonedDateTime utc = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
+        System.out.println("UTC");
+        System.out.println(utc);
+
+
     }
 }

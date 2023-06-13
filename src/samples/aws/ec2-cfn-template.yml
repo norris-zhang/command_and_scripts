@@ -1,0 +1,93 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Brands Migration Box stack'
+
+# Use public Systems Manager Parameter
+Parameters:
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-arm64-gp2
+
+Mappings:
+  AccountMapping:
+    '973953763841':
+      shimAccount: '971552653996'
+    '629206321152':
+      shimAccount: '261398284506'
+    '675008132621':
+      shimAccount: '919798599485'
+    '638990390463':
+      shimAccount: '456462180108'
+
+Resources:
+  MigrationBox:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: t4g.micro
+      SecurityGroupIds:
+        # - '{{resolve:ssm:/service-registry/billing-service-data/client-security-group}}'
+        # - '{{resolve:ssm:/service-registry/billing-service-redis/client-security-group}}'
+        # - '{{resolve:ssm:/service-registry/usage-aggregation-redis/security_group}}'
+        - !ImportValue unleash-rds-client-security-group
+      SubnetId: '{{resolve:ssm:/mm/aws/vpc/subnets/private/a/id}}'
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeSize: 50
+      IamInstanceProfile: !Ref Ec2InstanceProfile
+
+  # BuildServerDNS:
+  #   Type: AWS::Route53::RecordSet
+  #   Properties:
+  #     HostedZoneId: !ImportValue regdom-zoneid
+  #     Comment: Internal DNS record for Migration Box
+  #     Name: !Sub
+  #       - migration.${mmdomain}
+  #       - mmdomain: !ImportValue regdom-domain
+  #     Type: A
+  #     TTL: 60
+  #     ResourceRecords:
+  #       - !GetAtt MigrationBox.PrivateIp
+
+Ec2InstanceProfile:
+  Type: AWS::IAM::InstanceProfile
+  Properties:
+    Path: /
+    Roles:
+      - !Ref Ec2InstanceRole
+Ec2InstanceRole:
+  Type: AWS::IAM::Role
+  Properties:
+    AssumeRolePolicyDocument:
+      Version: 2012-10-17
+      Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+              - ec2.amazonaws.com
+          Action:
+            - sts:AssumeRole
+    Path: /
+    ManagedPolicyArns:
+      # The managed IAM policy AmazonSSMManagedInstanceCore grants access to Session Manager
+      - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore
+    # Policies:
+    #   - PolicyName: MigrationResources
+    #     PolicyDocument:
+    #       Statement:
+    #         # - Effect: Allow
+    #         #   Action:
+    #         #     - sqs:ListQueues
+    #         #     - sqs:GetQueueUrl
+    #         #     - sqs:ListDeadLetterSourceQueues
+    #         #     - sqs:ReceiveMessage
+    #         #     - sqs:GetQueueAttributes
+    #         #     - sqs:ListQueueTags
+    #         #   Resource:
+    #         #     - '*'
+    #         # - Effect: Allow
+    #         #   Action: sts:AssumeRole
+    #         #   Resource: !Sub
+    #         #     - arn:${AWS::Partition}:iam::${accountID}:role/brands-migration-shim-data-WriteAccessRole-*
+    #         #     - accountID: !FindInMap [ AccountMapping, !Ref "AWS::AccountId", shimAccount ]

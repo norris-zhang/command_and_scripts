@@ -188,3 +188,6 @@ If SQS subscribes SNS, it creates the access policy so the SNS can send messages
   }
 }
 ```
+
+- ### example cfn template for creating an EC2 instance
+[ec2-cfn-template.yml](samples/aws/ec2-cfn-template.yml)

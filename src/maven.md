@@ -54,3 +54,8 @@ $ mvn help:evaluate -Dexpression=project.properties -q -DforceStdout
 $ mvn -s ~/.m2/settings-default.xml -Dmaven.repo.local=~/.m2/repo-default/ clean install
 # -s = --settings
 ```
+
+- ### display dependency tree
+```shell
+$ mvn dependency:tree
+```

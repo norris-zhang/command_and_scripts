@@ -64,6 +64,10 @@ $ HGETALL user:1000
 $ HSET user:1000 password 12345
 # get all items of a key
 $ HGETALL user:1000
+# get one field value
+$ hget key field
+# scan through Hash
+$ hscan key 0 match *xxx* count 100
 ```
 
 - ### Data type: Set
@@ -90,4 +94,13 @@ Redis has 16 out-of-box logical databases, indexed 0 to 15
 cli> select 1
 # switched to database 1
 cli[1]> scan 0
+```
+
+- ### Lists operations
+Lists are linked Strings. They can be used as a queue (LPUSH RPOP) or a stack (LPUSH LPOP)
+```shell
+cli> lpush key element [element...]
+cli> lpop key [count]
+# lrange return [start, end], both ends inclusive
+cli> lrange key 0 -1
 ```
