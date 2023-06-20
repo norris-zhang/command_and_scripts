@@ -5,4 +5,9 @@
 [Javascript](src/javascript.md) \
 [PostgreSQL](src/postgresql.md) \
 [Docker](src/docker.md) \
-[Git](src/git.md)
+[Git](src/git.md) \
+[MockServer](src/mockserver.md) \
+[MySQL](src/mysql.md) \
+[Nginx](src/nginx.md) \
+[Python](src/python.md) \
+[Redis](src/Redis.md)
