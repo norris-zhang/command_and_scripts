@@ -104,3 +104,9 @@ cli> lpop key [count]
 # lrange return [start, end], both ends inclusive
 cli> lrange key 0 -1
 ```
+
+- ### Run redis commands from shell
+```shell
+$ redis-cli -h <host> [-p 6390] scan 0 match "*2023-06-16*" count 10000000 > ~/Documents/temp/atxt2.txt
+$ redis-cli -h <host> [-p 6390] hgetall "PROCESSING|0d6cf0ef-4137-48b6-89e4-01469343c827|2023-06-17|Pacific/Auckland" > ~/Documents/temp/atxt.txt
+```
