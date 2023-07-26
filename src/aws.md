@@ -191,3 +191,31 @@ If SQS subscribes SNS, it creates the access policy so the SNS can send messages
 
 - ### example cfn template for creating an EC2 instance
 [ec2-cfn-template.yml](samples/aws/ec2-cfn-template.yml)
+
+- ### Java saving objects to DynamoDB.
+```java
+class Example {
+  public void example() {
+    String dynamoAssumeRoleArn = "arn:aws:iam::<AWS_Account_Number>:role/<Role_Name>";
+    int dynamoAssumeRoleSessionDurationSeconds = 3600;
+    String region = "ap-southeast-2";
+    String tableName = "<table-name>";
+    
+    AWSCredentialsProvider credentialsProvider = new STSAssumeRoleSessionCredentialsProvider.Builder(dynamoAssumeRoleArn, "NorrisTest")
+        .withStsClient(AWSSecurityTokenServiceClientBuilder.defaultClient())
+        .withRoleSessionDurationSeconds(dynamoAssumeRoleSessionDurationSeconds)
+        .build();
+    AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard()
+        .withCredentials(credentialsProvider)
+        .withRegion(region)
+        .build();
+    DynamoDBMapper dynamoDBMapper = new DynamoDBMapper(dynamoDB, DynamoDBMapperConfig.builder()
+        .withTableNameOverride(new TableNameOverride(tableName))
+        .build());
+    
+    AccountUsageTrackingInfo info = new AccountUsageTrackingInfo();
+    info.setTrackingId("NorrisTest");
+    dynamoDBMapper.save(info);
+  }
+}
+```

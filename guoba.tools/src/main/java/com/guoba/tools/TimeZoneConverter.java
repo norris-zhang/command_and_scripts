@@ -10,10 +10,10 @@ public class TimeZoneConverter {
     public static void main(String[] args) {
 //        listZones();
 //        zonedConversion();
-//        localToZoned();
+        localToZoned();
 //        whichTimeZoneHasDifferentDateFromUTC();
 //        dateTimeToTimestamp();
-        testZoneLocal();
+//        testZoneLocal();
     }
 
     private static void testZoneLocal() {
@@ -53,10 +53,10 @@ public class TimeZoneConverter {
     }
 
     private static void localToZoned() {
-        String localStr = "2023-05-16T00:00:00.000";
+        String localStr = "2023-07-13T11:15:15.999";
         LocalDateTime localDateTime = LocalDateTime.parse(localStr);
-        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("America/Los_Angeles"));
-        System.out.println("LA");
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("Pacific/Auckland"));
+        System.out.println("Auckland");
         System.out.println(zonedDateTime);
 
         ZonedDateTime utc = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
