@@ -81,4 +81,13 @@ $ sudo alternatives --config java
 $ sudo yum remove java-17-amazon-corretto-headless
 ```
 
-
+- ### xargs
+xargs takes the previous command's result and pass it to the next command.
+```shell
+# This finds in the current directory and all sub-directories for any files whose names contain `fail.txt`
+# Then these file names (paths) will be sent to command `cat` and in turn to `grep`.
+$ find . | grep fail.txt | xargs -I {} cat {} | grep json
+# xargs -I {} cat {}
+# -I is defining {} as the placeholder
+# so the previous command's output will be replacing {} in the following command. 
+```

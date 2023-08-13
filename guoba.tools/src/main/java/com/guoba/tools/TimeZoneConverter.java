@@ -53,14 +53,12 @@ public class TimeZoneConverter {
     }
 
     private static void localToZoned() {
-        String localStr = "2023-07-13T11:15:15.999";
+        String localStr = "2023-08-07T18:47:00.000";
         LocalDateTime localDateTime = LocalDateTime.parse(localStr);
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("Pacific/Auckland"));
-        System.out.println("Auckland");
         System.out.println(zonedDateTime);
 
         ZonedDateTime utc = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
-        System.out.println("UTC");
         System.out.println(utc);
     }
 
