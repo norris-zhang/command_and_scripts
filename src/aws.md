@@ -158,6 +158,16 @@ $ aws ecs execute-command --region us-west-2 \
     --command "curl -X POST --data DEBUG -H'Content-type: text/plain' http://localhost:8888/loglevels/com.messagemedia.zuora" \
     --interactive
 ```
+or use this command to connect to the running task:
+```shell
+aws ecs execute-command --cluster web-usage-aggregator-service-cluster --container usage-aggregator --interactive --command "/bin/sh" --task d967d2600e74407687af653390ad8f28
+```
+once in the running task I use:
+```shell
+curl -X POST --data DEBUG -H'Content-type: text/plain' http://localhost:8888/loglevels/com.messagemedia
+curl -X POST --data WARN -H'Content-type: text/plain' http://localhost:8888/loglevels/com.messagemedia.framework.web.health
+```
+to set the log level to DEBUG.
 
 - CDK synth
 ```shell

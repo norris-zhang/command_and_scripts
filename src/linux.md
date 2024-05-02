@@ -1,3 +1,19 @@
+- ### generate random password
+```shell
+$ openssl rand -base64 12
+NR+xQ5jmLLSCVIkM
+```
+- ### bcrypt a password
+```shell
+$ htpasswd -nbB user examplepassword
+user:$2y$05$Fi1T4kW1FZ2KQ9uhx12lWuBlm6r0.vKlavptrlPPmphhJ5k1AoBM6
+# removing -b will result in asking the user to enter password, so password does not appear in the history.
+$ htpasswd -nB user
+New password:
+Retry new password:
+user:$2y$05$eQ1Y/eNEsG.t2.ho4zWrCOpkPn/xQEVEYlK5dA5G4ipeKMTHqjDVu
+```
+
 - ### grep to find string in files recursively
 ```shell
 $ grep -r "keyword to look" /folder

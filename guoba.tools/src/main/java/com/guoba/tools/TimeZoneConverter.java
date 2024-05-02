@@ -14,6 +14,14 @@ public class TimeZoneConverter {
 //        whichTimeZoneHasDifferentDateFromUTC();
 //        dateTimeToTimestamp();
 //        testZoneLocal();
+        usEastToAuckland();
+    }
+
+    private static void usEastToAuckland() {
+        LocalDateTime localDateTime = LocalDateTime.parse("2024-04-22T22:00:00");
+        ZonedDateTime et = localDateTime.atZone(ZoneId.of("America/New_York"));
+        ZonedDateTime auckland = et.withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
+        System.out.printf("ET %s = NZ %s%n", et, auckland);
     }
 
     private static void testZoneLocal() {
@@ -53,12 +61,12 @@ public class TimeZoneConverter {
     }
 
     private static void localToZoned() {
-        String localStr = "2023-08-07T18:47:00.000";
+        String localStr = "2024-04-10T14:55:51.607";
         LocalDateTime localDateTime = LocalDateTime.parse(localStr);
-        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("Pacific/Auckland"));
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("UTC"));
         System.out.println(zonedDateTime);
 
-        ZonedDateTime utc = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
+        ZonedDateTime utc = zonedDateTime.withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
         System.out.println(utc);
     }
 
