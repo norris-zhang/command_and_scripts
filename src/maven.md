@@ -58,4 +58,6 @@ $ mvn -s ~/.m2/settings-default.xml -Dmaven.repo.local=~/.m2/repo-default/ clean
 - ### display dependency tree
 ```shell
 $ mvn dependency:tree
+# for a specific dependency
+$ mvn dependency:tree -Dincludes=org.slf4j:slf4j-api -Dverbose
 ```

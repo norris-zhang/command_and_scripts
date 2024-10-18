@@ -1,3 +1,21 @@
+- ### UUID Generator
+```shell
+$ uuidgen | tr 'A-Z' 'a-z'
+87cfc59f-0403-47b1-8ef8-429501322cc8
+```
+
+### SSH file transfer
+```shell
+$ scp -i .ssh/key.pem -r /path/to/local/folder ec2-user@ip:/path/to/remote/folder
+```
+
+- ### curl and include http status code
+```shell
+$ curl -L -i https://example.com/path -H "Authorization: basic base64"
+# -L, --location: redirect if informed by the server
+# -i: include http status code and headers
+```
+
 - ### generate random password
 ```shell
 $ openssl rand -base64 12
@@ -75,6 +93,10 @@ $ openssl base64 [-e][enter]
 
 $ # in MacOS
 $ echo -n "text" | base64
+
+$ # to generate the Basic Authorization value providing username and password
+$ echo -n "username:password" | base64
+$ # -n makes sure that a newline is not added.
 ```
 
 - ### Ubuntu auto remove to clear /boot space full
@@ -98,7 +120,7 @@ $ sudo yum remove java-17-amazon-corretto-headless
 ```
 
 - ### xargs
-xargs takes the previous command's result and pass it to the next command.
+xargs takes the previous command's result and passes it to the next command.
 ```shell
 # This finds in the current directory and all sub-directories for any files whose names contain `fail.txt`
 # Then these file names (paths) will be sent to command `cat` and in turn to `grep`.

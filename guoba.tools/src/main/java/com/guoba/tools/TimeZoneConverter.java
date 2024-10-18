@@ -1,59 +1,69 @@
 package com.guoba.tools;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
+import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 public class TimeZoneConverter {
     public static void main(String[] args) {
 //        listZones();
-//        zonedConversion();
-        localToZoned();
-//        whichTimeZoneHasDifferentDateFromUTC();
+//        localToZoned();
 //        dateTimeToTimestamp();
-//        testZoneLocal();
-        usEastToAuckland();
+        convertTimezone();
+//        convertOffset();
     }
 
-    private static void usEastToAuckland() {
-        LocalDateTime localDateTime = LocalDateTime.parse("2024-04-22T22:00:00");
-        ZonedDateTime et = localDateTime.atZone(ZoneId.of("America/New_York"));
-        ZonedDateTime auckland = et.withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
-        System.out.printf("ET %s = NZ %s%n", et, auckland);
+    private static void convertOffset() {
+        ZoneId cet = ZoneId.of("CET");
+        ZonedDateTime cetTime = LocalDateTime.parse("2024-08-10T21:33").atZone(cet);
+        ZonedDateTime aucklandTime = cetTime.withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
+        System.out.println("Auckland time is: " + aucklandTime);
+
+
+        System.out.println("Auckland time is: " + LocalDateTime.parse("2024-08-10T05:30").atZone(TimeZone.getTimeZone("AEST").toZoneId()).withZoneSameInstant(ZoneId.of("Pacific/Auckland")));
+        System.out.println("Auckland time is: " + LocalDateTime.parse("2024-08-10T05:30").atOffset(ZoneOffset.ofHours(10)).atZoneSameInstant(ZoneId.of("Pacific/Auckland")));
+        System.out.println("Auckland time is: " + LocalDateTime.parse("2024-08-10T21:30").atOffset(ZoneOffset.ofHours(2)).atZoneSameInstant(ZoneId.of("Pacific/Auckland")));
+        System.out.println("Auckland time is: " + LocalDateTime.parse("2024-08-10T21:30").atZone(ZoneId.of("Europe/Paris")).withZoneSameInstant(ZoneId.of("Pacific/Auckland")));
+
+        System.out.println(ZoneId.getAvailableZoneIds().stream().sorted().collect(Collectors.toList()));
+        // 10 August 2024 02:33 GMT+12
+        String offsetDateTime = "2024-08-10 02:33 GMT+12";
+        OffsetDateTime offsetDT = LocalDateTime.parse("2024-08-10T02:33").atOffset(ZoneOffset.ofHours(12));
+        ZonedDateTime zonedDateTime = offsetDT.atZoneSameInstant(ZoneId.of("Pacific/Auckland"));
+        System.out.println(zonedDateTime);
     }
 
-    private static void testZoneLocal() {
-        ZonedDateTime now = ZonedDateTime.now();
-        System.out.println(now);
-        System.out.println(now.toLocalDateTime());
-        System.out.println(now);
-        ZonedDateTime zonedDateTime = now.withZoneSameInstant(ZoneId.of("America/Los_Angeles"));
-        System.out.println("LA");
-        System.out.println(zonedDateTime);
-        System.out.println(zonedDateTime.toLocalDateTime());
-        System.out.println(zonedDateTime);
+    private static void convertTimezone() {
+        String localDateTimeStr = "2024-10-15T12:42:25.509";
+        String fromZone = "UTC";
+//        String fromZone = "America/New_York";
+        String toZone = "Australia/Melbourne";
+//        String toZone = "Pacific/Auckland";
+        LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeStr);
+        ZonedDateTime fromDateTime = localDateTime.atZone(ZoneId.of(fromZone));
+        ZonedDateTime toDateTime = fromDateTime.withZoneSameInstant(ZoneId.of(toZone));
+        System.out.printf(" %s = %s%n", fromDateTime, toDateTime);
+        System.out.printf("%s timestamp is %d%n%n", fromDateTime, fromDateTime.toInstant().toEpochMilli());
+
+        long timestamp = 1727399319194L;
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.of("Pacific/Auckland"));
+        System.out.printf("timestamp %d is %s%n%n", timestamp, zonedDateTime);
+
+
     }
 
     private static void dateTimeToTimestamp() {
-        ZonedDateTime zdt = ZonedDateTime.parse("2022-10-31T02:02:02+13:00", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-        System.out.println(zdt.toString());
+        System.out.println("===== dateTimeToTimestamp =====");
+        ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("UTC"));
+        System.out.println(zdt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")));
 
-    }
-
-    private static void whichTimeZoneHasDifferentDateFromUTC() {
-        Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(2022, 1, 1, 0, 0, 0, 0, ZoneId.of("UTC"));
-        System.out.println(zonedDateTime);
-        int dayOfMonth = zonedDateTime.getDayOfMonth();
-        availableZoneIds.forEach(tz -> {
-            ZonedDateTime zdt = zonedDateTime.withZoneSameInstant(ZoneId.of(tz));
-            if (zdt.getDayOfMonth() != dayOfMonth) {
-                System.out.println("timezone: " + tz);
-                System.out.println(zdt);
-            }
-        });
     }
 
     private static void listZones() {
@@ -61,27 +71,12 @@ public class TimeZoneConverter {
     }
 
     private static void localToZoned() {
-        String localStr = "2024-04-10T14:55:51.607";
+        String localStr = "2024-05-28T16:12:04";
         LocalDateTime localDateTime = LocalDateTime.parse(localStr);
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("UTC"));
         System.out.println(zonedDateTime);
 
         ZonedDateTime utc = zonedDateTime.withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
         System.out.println(utc);
-    }
-
-    private static void zonedConversion() {
-
-        //"2023-05-11 17:20:36 UTC+1200"
-        String zonedStr = "2023-05-16T00:00:00+12:00";
-        ZonedDateTime zonedDateTime = ZonedDateTime.parse(zonedStr);
-        System.out.println("UTC+12");
-        System.out.println(zonedDateTime);
-
-        ZonedDateTime utc = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
-        System.out.println("UTC");
-        System.out.println(utc);
-
-
     }
 }

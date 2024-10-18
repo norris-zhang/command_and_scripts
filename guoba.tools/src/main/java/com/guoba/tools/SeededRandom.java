@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class SeededRandom {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -27,17 +28,20 @@ public class SeededRandom {
 
         int threads = 1000;
         List<Future<PowerResult>> resultList;
-        try (ExecutorService executorService = Executors.newFixedThreadPool(threads)) {
-            BigDecimal max = new BigDecimal(Long.MAX_VALUE);
-            BigDecimal min = new BigDecimal(Long.MIN_VALUE);
-            BigDecimal total = max.subtract(min);
-            BigDecimal step = total.divideToIntegralValue(BigDecimal.valueOf(threads));
+        ExecutorService executorService = null;
+        executorService = Executors.newFixedThreadPool(threads);
+        BigDecimal max = new BigDecimal(Long.MAX_VALUE);
+        BigDecimal min = new BigDecimal(Long.MIN_VALUE);
+        BigDecimal total = max.subtract(min);
+        BigDecimal step = total.divideToIntegralValue(BigDecimal.valueOf(threads));
 
-            resultList = new ArrayList<>();
-            for (long i = Long.MIN_VALUE; i < Long.MAX_VALUE; i += step.longValue()) {
-                resultList.add(executorService.submit(new LottoThread(i, i, i + step.longValue(), goals)));
-            }
+        resultList = new ArrayList<>();
+        for (long i = Long.MIN_VALUE; i < Long.MAX_VALUE; i += step.longValue()) {
+            resultList.add(executorService.submit(new LottoThread(i, i, i + step.longValue(), goals)));
         }
+        executorService.shutdown();
+        executorService.awaitTermination(1L, TimeUnit.HOURS);
+
         List<PowerResult> suggestions = new ArrayList<>();
         for (Future<PowerResult> result : resultList) {
             PowerResult powerResult = result.get();
