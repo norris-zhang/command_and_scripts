@@ -72,6 +72,13 @@ $ sudo systemsetup -listtimezones
 $ sudo systemsetup -listtimezones | grep -i sydney
 $ sudo systemsetup -settimezone Australia/Sydney
 ```
+On Amazon Linux
+```shell
+$ timedatectl list-timezones | grep Auckland
+$ sudo timedatectl set-timezone Pacific/Auckland
+# verify
+$ timedatectl
+```
 
 - ### Count lines
 ```shell
