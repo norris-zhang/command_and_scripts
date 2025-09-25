@@ -1,14 +1,16 @@
 package com.guoba.tools;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class JavaStudy {
     public static void main(String[] args) {
-        Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < 10; i++) {
-            map.put("a", map.computeIfAbsent("a", k -> 0) + 2);
-            System.out.println(map.get("a"));
-        }
+        int i = 2147483647;
+        System.out.println(i + 1);
+        float f = 5;
+        double d = 5;
     }
 }

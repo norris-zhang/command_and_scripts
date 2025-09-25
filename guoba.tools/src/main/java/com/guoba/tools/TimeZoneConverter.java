@@ -1,5 +1,6 @@
 package com.guoba.tools;
 
+import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -40,11 +41,18 @@ public class TimeZoneConverter {
     }
 
     private static void convertTimezone() {
-        String localDateTimeStr = "2024-10-15T12:42:25.509";
-        String fromZone = "UTC";
+        Instant now = Instant.now();
+        System.out.println(now.toEpochMilli());
+        System.out.println(now.getNano());
+        String localDateTimeStr = "2025-09-22T16:00:00.000";
+//        String fromZone = "Australia/Melbourne";
+        String fromZone = "Pacific/Auckland";
+//        String fromZone = "UTC";
 //        String fromZone = "America/New_York";
-        String toZone = "Australia/Melbourne";
+//        String toZone = "UTC";
+//        String toZone = "Australia/Melbourne";
 //        String toZone = "Pacific/Auckland";
+        String toZone = "America/Los_Angeles";
         LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeStr);
         ZonedDateTime fromDateTime = localDateTime.atZone(ZoneId.of(fromZone));
         ZonedDateTime toDateTime = fromDateTime.withZoneSameInstant(ZoneId.of(toZone));

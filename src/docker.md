@@ -11,6 +11,28 @@ $ docker compose up -d
 $ docker-compose exec sqs sh
 # This will sh into the service sqs. Inside it, you will be able to test connectivity to other services.
 # But these IPs are not accessible from outside of the container.
+
+# this lists the running docker-compose.yml files
+$ docker compose ls
+
+# this lists the containers created by docker-compose.yml
+$ docker compose ps
+NAME                           IMAGE                       COMMAND                  SERVICE      CREATED             STATUS                       PORTS
+billing-service-dynamo-1       alpine:latest               "sh -c 'apk add --no…"   dynamo       About an hour ago   Up About an hour             0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+billing-service-localstack-1   localstack/localstack:4.5   "docker-entrypoint.sh"   localstack   About an hour ago   Up About an hour (healthy)   4510-4559/tcp, 4566/tcp, 5678/tcp
+billing-service-redis-1        redis:7-alpine              "docker-entrypoint.s…"   redis        About an hour ago   Up About an hour             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
+billing-service-sns-1          alpine:latest               "sh -c 'apk add --no…"   sns          About an hour ago   Up About an hour             0.0.0.0:9292->9292/tcp, [::]:9292->9292/tcp
+billing-service-sqs-1          alpine:latest               "sh -c 'apk add --no…"   sqs          About an hour ago   Up About an hour             0.0.0.0:9324->9324/tcp, [::]:9324->9324/tcp
+
+# then use part of the container name to exec into the container
+$ docker compose exec localstack bash
+
+# or use the full container name
+$ docker exec -it billing-service-localstack-1 bash
+
+# then inside the container, you can use aws cli to access the localstack services
+root@7bf8044aa1e1:/opt/code/localstack# awslocal s3 ls
+root@7bf8044aa1e1:/opt/code/localstack# awslocal sqs list-queues
 ```
 
 - ### utilise stackup docker image to deploy cloudformation

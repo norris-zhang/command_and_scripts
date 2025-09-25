@@ -1,3 +1,10 @@
+- ### find and delete files or folders
+```shell
+$ find . -name ".DS_Store" -exec rm -f {} +
+# find in current fold for name .DS_Store and then execute rm -f to them in one combined command.
+# + means to combine the rm command rather than delete every file individually.
+```
+ 
 - ### UUID Generator
 ```shell
 $ uuidgen | tr 'A-Z' 'a-z'

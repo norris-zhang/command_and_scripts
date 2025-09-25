@@ -1,3 +1,25 @@
+- ### aws s3 sync
+```shell
+# --delete makes sure the obsolete files are removed
+$ aws s3 sync /local/path s3://your-bucket-name --delete
+
+# aws s3 sync checks last modified timestamp and file size
+# if stricter compare is required, use --exact-timestamps to preserve timestamp
+$ aws s3 sync /local/path s3://your-bucket-name --exact-timestamps --delete
+
+# use --dry-run to detect changes.
+aws s3 sync /local/path s3://your-bucket-name --dryrun
+
+# use --force to overwrite everything
+$ aws s3 sync /local/path s3://your-bucket-name --exact-timestamps --force
+```
+
+- ### find and delete files
+```shell
+$ find . -name ".DS_Store" -exec rm -f {} +
+# + sign means to combine the found files into one rm command.
+```
+
 - ### Get caller identity
 ```shell
 $ aws sts get-caller-identity
