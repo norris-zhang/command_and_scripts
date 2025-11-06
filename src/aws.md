@@ -8,7 +8,7 @@ $ aws s3 sync /local/path s3://your-bucket-name --delete
 $ aws s3 sync /local/path s3://your-bucket-name --exact-timestamps --delete
 
 # use --dry-run to detect changes.
-aws s3 sync /local/path s3://your-bucket-name --dryrun
+$ aws s3 sync /local/path s3://your-bucket-name --dryrun
 
 # use --force to overwrite everything
 $ aws s3 sync /local/path s3://your-bucket-name --exact-timestamps --force

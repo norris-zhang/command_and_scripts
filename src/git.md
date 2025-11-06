@@ -1,3 +1,26 @@
+- ### use .ssh/config to manage multiple private keys
+```shell
+# in ~/.ssh/config
+Host github-norris
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+
+# now the host alias github-norris refers to github.com with the specified private key
+$ git clone git@github-norris:owner/repo.git
+$ git pull
+$ git push origin main
+```
+
+- ### git commands with a specific private key
+```shell
+$ export GIT_SSH_COMMAND='ssh -i /path/to/private_key -o IdentitiesOnly=yes'
+$ git clone git@github.com:owner/repo.git
+$ git pull
+$ git push origin main
+```
+
 - ### git diff stash
 ```shell
 $ git stash show stash@{0} -p
