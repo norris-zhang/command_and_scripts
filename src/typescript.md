@@ -12,11 +12,24 @@ $ cd my-typescript-project
 # -y flag uses default settings (answer 'yes' to all prompts)
 $ npm init -y
 
+# in package.json, set "type": "module" if you plan to use ES modules
+
 # install TypeScript as a development dependency
 $ npm install typescript --save-dev
 
 # create a tsconfig.json file with default settings
 $ npx tsc --init
+
+# config
+# "rootDir": "./src",
+# "outDir": "./dist",
+# "strict": true,
+# "module": "nodenext",
+# "target": "es2022",
+# "lib": ["es2022"],
+# "types": ["node"],
+# then run $ npm install -D @types/node
+
 
 # create a src folder and a sample TypeScript file
 $ mkdir src

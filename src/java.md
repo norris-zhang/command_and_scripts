@@ -1,3 +1,8 @@
+- ### class loaders
+When you call Thread.currentThread().getContextClassLoader(), \
+In a web server, such as Jetty, it is normally WebAppClassLoader which loads classes from WEB-INF/classes and WEB-INF/lib. \
+In a standalone Java application, it is normally the AppClassLoader which loads classes from the classpath.
+
 - ### jenv commands
 ```shell
 $ jenv add /Library/Java/JavaVirtualMachines/openjdk-14.0.1.jdk/Contents/Home
@@ -20,7 +25,7 @@ $ mvn clean flyway:info -Dflyway.user=lisa -Dflyway.password=password -Dflyway.u
 - ### Map.computeIfAbsent
 ```java
 class C {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Map<String, String> map = new HashMap<>();
         map.computeIfAbsent(key, x -> compute(x));
     }
@@ -34,9 +39,9 @@ $ mvn xxx -Dspring.profiles.active=dev
 
 - ### @Value default to empty string or null
 ```java
-@Value("${something.something:}")
+@Value("${something.something:}") String s;
 // or
-@Value("${something.something:#{null}}")
+@Value("${something.something:#{null}}") String s;
 ```
 
 - ### IntelliJ Hot Keys
